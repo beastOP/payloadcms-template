@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": "file:///Users/omkarpatil/Development/tutorials/payloadcms-blog/.github/workflows/gcr.yml"
+    }
+}

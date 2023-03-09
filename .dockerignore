@@ -1,0 +1,10 @@
+Dockerfile
+.dockerignore
+.terraform
+.terraform.lock.hcl
+gcr_deploy.sh
+main.tf
+node_modules
+README.md
+build
+dist

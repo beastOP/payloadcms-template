@@ -1,0 +1,1 @@
+gh secret set SERVICE_ACCOUNT_KEY < ./key.json
