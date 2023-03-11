@@ -107,3 +107,5 @@ jobs:
             SMTP_USER=${{ secrets.SMTP_USER }}
             SMTP_PASS=${{ secrets.SMTP_PASS }}
             PAYLOAD_PUBLIC_PAYLOAD_URL=${{ secrets.PAYLOAD_URL }}
+            PAYLOAD_URL=${{ secrets.PAYLOAD_URL }}
+            PAYLOAD_PUBLIC_PAYLOAD_API=${{ secrets.PAYLOAD_URL }}
