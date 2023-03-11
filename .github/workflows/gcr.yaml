@@ -2,6 +2,7 @@ name: Build and deploy docker to cloud run
 on:
   push:
     paths:
+      - ".github/**"
       - "src/**"
       - "scripts/**"
       - "Dockerfile"
@@ -12,6 +13,11 @@ on:
 env:
   IMAGE_NAME: payloadcms-blog
   PROJECT_ID: payloadcms-test
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+  SMTP_HOST: ${{ secrets.SMTP_HOST}}
+  SMTP_USER: ${{ secrets.SMTP_USER }}
+  SMTP_PASS: ${{ secrets.SMTP_PASS }}
 
 jobs:
   build-push-gcr:
@@ -75,4 +81,13 @@ jobs:
           docker tag $IMAGE_NAME:latest ${{ env.IMAGE_URL }}:$GIT_TAG
           docker push ${{ env.IMAGE_URL }}:latest
           docker push ${{ env.IMAGE_URL }}:$GIT_TAG
-      # END Push
+
+      # Deploy to app engine
+      - name: Deploy to App Engine
+        env:
+          GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+          IMAGE_URL: "gcr.io/${{env.PROJECT_ID}}/${{env.IMAGE_NAME}}"
+        run: |-
+          gcloud app deploy --image-url=${{ env.IMAGE_URL }}:$GIT_TAG \
+          --project=${{ env.PROJECT_ID }} \
+          --set-env-vars=MONGODB_URI=${{ env.MONGODB_URI }},SMTP_HOST=${{ env.SMTP_HOST }},SMTP_USER=${{ env.SMTP_USER }},SMTP_PASS=${{ env.SMTP_PASS }}
