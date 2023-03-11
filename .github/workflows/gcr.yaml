@@ -106,4 +106,4 @@ jobs:
             SMTP_HOST=${{ secrets.SMTP_HOST}}
             SMTP_USER=${{ secrets.SMTP_USER }}
             SMTP_PASS=${{ secrets.SMTP_PASS }}
-            PAYLOAD_URL=${{ secrets.PAYLOAD_URL }}
+            PAYLOAD_PUBLIC_PAYLOAD_URL=${{ secrets.PAYLOAD_URL }}
