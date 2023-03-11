@@ -7,7 +7,6 @@ import Users from "./collections/Users";
 import Media from "./collections/Media";
 import { gcsAdapter } from "@payloadcms/plugin-cloud-storage/gcs";
 import { cloudStorage } from "@payloadcms/plugin-cloud-storage";
-import { List } from "payload/components/views/List";
 
 let adapter = gcsAdapter({
   options: {
@@ -17,12 +16,15 @@ let adapter = gcsAdapter({
   bucket: process.env.GCS_BUCKET,
 });
 
+const serverURL = process.env.PAYLOAD_PUBLIC_SERVER_URL ||
+  "http://localhost:3000";
+
 export default buildConfig({
-  serverURL: "http://localhost:3000",
+  serverURL,
   admin: {
     user: Users.slug,
   },
-  
+
   collections: [
     Categories,
     Posts,
