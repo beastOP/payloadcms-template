@@ -16,7 +16,7 @@ let adapter = gcsAdapter({
   bucket: process.env.GCS_BUCKET,
 });
 
-const serverURL = process.env.PAYLOAD_PUBLIC_SERVER_URL ||
+const serverURL = process.env.PAYLOAD_URL ||
   "http://localhost:3000";
 
 export default buildConfig({
