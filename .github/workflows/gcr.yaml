@@ -83,11 +83,22 @@ jobs:
           docker push ${{ env.IMAGE_URL }}:$GIT_TAG
 
       # Deploy to app engine
+      # - name: Deploy to App Engine
+      #   env:
+      #     GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+      #     IMAGE_URL: "gcr.io/${{env.PROJECT_ID}}/${{env.IMAGE_NAME}}"
+      #   run: |-
+      #     gcloud app deploy --image-url=${{ env.IMAGE_URL }}:$GIT_TAG \
+      #     --project=${{ env.PROJECT_ID }} \
+      #     --set-env-vars=MONGODB_URI=${{ env.MONGODB_URI }},SMTP_HOST=${{ env.SMTP_HOST }},SMTP_USER=${{ env.SMTP_USER }},SMTP_PASS=${{ env.SMTP_PASS }}
+
       - name: Deploy to App Engine
-        env:
-          GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
-          IMAGE_URL: "gcr.io/${{env.PROJECT_ID}}/${{env.IMAGE_NAME}}"
-        run: |-
-          gcloud app deploy --image-url=${{ env.IMAGE_URL }}:$GIT_TAG \
-          --project=${{ env.PROJECT_ID }} \
-          --set-env-vars=MONGODB_URI=${{ env.MONGODB_URI }},SMTP_HOST=${{ env.SMTP_HOST }},SMTP_USER=${{ env.SMTP_USER }},SMTP_PASS=${{ env.SMTP_PASS }}
+        uses: "google-github-actions/deploy-appengine@v1"
+        with:
+          flags: "--image-url=gcr.io/${{env.PROJECT_ID}}/${{env.IMAGE_NAME}}:${{ steps.increment-git-tag.outputs.git-tag }}"
+          env_vars: |-
+            MONGODB_URI=${{ secrets.MONGODB_URI }}
+            PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}
+            SMTP_HOST=${{ secrets.SMTP_HOST}}
+            SMTP_USER=${{ secrets.SMTP_USER }}
+            SMTP_PASS=${{ secrets.SMTP_PASS }}
