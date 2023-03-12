@@ -16,8 +16,11 @@ let adapter = gcsAdapter({
   bucket: process.env.GCS_BUCKET,
 });
 
-const serverURL = process.env.PAYLOAD_PUBLIC_PAYLOAD_URL ||
-  "http://localhost:3000";
+if (!process.env.PAYLOAD_PUBLIC_PAYLOAD_URL) {
+  throw new Error("Cannot get the env variables");
+}
+
+const serverURL = process.env.PAYLOAD_PUBLIC_PAYLOAD_URL ?? "http://localhost";
 
 export default buildConfig({
   serverURL,

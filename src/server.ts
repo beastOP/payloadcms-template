@@ -3,9 +3,9 @@ import payload from "payload";
 import nodemailer from "nodemailer";
 
 require("dotenv").config();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 const app = express();
-app.enable('trust proxy')
+app.enable("trust proxy");
 
 // Redirect root to Admin panel
 app.get("/", (_, res) => {
@@ -15,7 +15,7 @@ app.get("/", (_, res) => {
 const start = async () => {
   const transport = await nodemailer.createTransport({
     host: process.env.SMTP_HOST,
-    port:  465,
+    port: 465,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
