@@ -66,7 +66,7 @@ jobs:
 
       # Build the docker image
       - name: Build Docker Image
-        run: docker build -t $IMAGE_NAME:latest .
+        run: docker build --build-arg PAYLOAD_PUBLIC_PAYLOAD_URL=${{ secrets.PAYLOAD_URL }} -t $IMAGE_NAME:latest  .
       # END Build
 
       # Enable auto tagging

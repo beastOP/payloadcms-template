@@ -11,11 +11,13 @@ RUN yarn build
 
 FROM base as runtime
 
+ARG PAYLOAD_PUBLIC_PAYLOAD_URL="http://localhost"
 
 ENV NODE_ENV=production
 ENV PAYLOAD_CONFIG_PATH=dist/payload.config.js
 ENV GCS_BUCKET=my-test-bucket-2002
 ENV GCS_PROJECT_ID=payloadcms-test
+ENV PAYLOAD_PUBLIC_PAYLOAD_URL=${PAYLOAD_PUBLIC_PAYLOAD_URL}
 
 WORKDIR /home/node/app
 COPY package*.json  ./
