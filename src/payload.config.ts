@@ -22,7 +22,7 @@ if (!process.env.PAYLOAD_PUBLIC_PAYLOAD_URL) {
 }
 
 export default buildConfig({
-  serverURL: process.env.PAYLOAD_PUBLIC_PAYLOAD_URL ?? "http://localhost",
+  serverURL: process.env.PAYLOAD_PUBLIC_PAYLOAD_URL ?? "https://payloadcms-test.el.r.appspot.com",
   admin: {
     user: Users.slug,
   },
