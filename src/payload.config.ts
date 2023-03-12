@@ -21,10 +21,8 @@ if (!process.env.PAYLOAD_PUBLIC_PAYLOAD_URL) {
   console.error("Cannot get the env variables");
 }
 
-const serverURL = process.env.PAYLOAD_PUBLIC_PAYLOAD_URL ?? "http://localhost";
-
 export default buildConfig({
-  serverURL,
+  serverURL: process.env.PAYLOAD_PUBLIC_PAYLOAD_URL ?? "http://localhost",
   admin: {
     user: Users.slug,
   },
