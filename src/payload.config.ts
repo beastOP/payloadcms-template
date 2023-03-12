@@ -17,7 +17,8 @@ let adapter = gcsAdapter({
 });
 
 if (!process.env.PAYLOAD_PUBLIC_PAYLOAD_URL) {
-  throw new Error("Cannot get the env variables");
+  // throw new Error("");
+  console.error("Cannot get the env variables");
 }
 
 const serverURL = process.env.PAYLOAD_PUBLIC_PAYLOAD_URL ?? "http://localhost";
