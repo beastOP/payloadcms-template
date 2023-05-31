@@ -28,7 +28,7 @@ const start = async () => {
     express: app,
     email: {
       fromName: "Admin",
-      fromAddress: "umeshgote@kuberinvestors.com",
+      fromAddress: "example@example.com",
       transport,
     },
     onInit: async () => {
